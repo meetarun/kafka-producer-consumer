@@ -1,0 +1,33 @@
+server:
+  port: 9000
+spring:
+  kafka:
+    topic:
+      name: my-first-topic
+    bootstrap-servers: localhost:9012
+    template:
+      default-topic: "MyTopic"
+#    properties:
+        #Server host name verification is disabled by setting ssl.endpoint.identification.algorithm to an empty string
+#        ssl.endpoint.identification.algorithm:
+    ssl:
+      protocol: SSL
+#        trust-store-location: classpath:/app/store/truststore.jks
+#        trust-store-password: <TURST_STORE_PASSWORD>
+#        key-store-location: classpath:/app/store/keystore.jks
+#        key-store-password: <KEY_STORE_PASSWORD>
+#        key-password: <KEY_PASSWORD>
+    producer:
+      retries: 3
+      acks: all
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: first_cons_group_1
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+      heartbeat-interval: 20000
+      max-poll-records: 100
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
