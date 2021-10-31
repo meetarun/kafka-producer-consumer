@@ -1,4 +1,4 @@
-1. **SpringBoot Based Kafka Producer and Consumer Application**
+1. #####SpringBoot Based Kafka Producer and Consumer Application#####
 
     Repo :  https://github.com/meetarun/kafka-producer-consumer
 
@@ -11,7 +11,7 @@
 
 Kafka configs can be found at _resources/application.yml_file_
 
-2. Strimzi Kafka Setup 
+2. #####Strimzi Kafka Setup #####
      
     1. To Install Helm Chart V3 
         ``` brew install helm ```
@@ -52,8 +52,22 @@ Kafka configs can be found at _resources/application.yml_file_
    
     9. 
    
-4. Kafka **Helm Chart** Deployment Using **GIT-Ops through ArgoCD**
- 
+3. ##### Kafka Helm Chart Deployment Using GIT-Ops through ArgoCD#####
+    Helm Chart  Manifests Repo : https://github.com/meetarun/argocd-kafka-manifests 
+    ArgoCD Install Repo        : https://github.com/meetarun/argocd-kafka-install
+   1. Clone the Repo argocd-kafka-install , we will use ArgoCD helm charts presents in this repo to install our ArogCD
+    
+   2. Install the ArgoCD from 
+   
+      ``` helm install argocd argocd-install/argo-cd/ --namespace=argocdns --create-namespace -f argocd-install/values-override.yaml```
+   3. Port Forward the ArgoCD service using 
+   
+       ``` kubectl port-forward service/argocd-server -n argocdn 8080:443```
+        Now we can Access ArgoCD UI through http://localhost:8080 
+   4. To Login to the UI find the password for admin using below command
+      
+       ```  kubectl -n argocdns  get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo ```
+   5. df
    
 
 
