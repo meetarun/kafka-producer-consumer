@@ -52,9 +52,12 @@ Kafka configs can be found at _resources/application.yml_file_
    
     9. 
    
-3. ##### Kafka Helm Chart Deployment Using GIT-Ops through ArgoCD#####
+3. ##### Kafka Helm Chart Deployment Using GIT-Ops through ArgoCD #####
+
     Helm Chart  Manifests Repo : https://github.com/meetarun/argocd-kafka-manifests 
+
     ArgoCD Install Repo        : https://github.com/meetarun/argocd-kafka-install
+
    1. Clone the Repo argocd-kafka-install , we will use ArgoCD helm charts presents in this repo to install our ArogCD
     
    2. Install the ArgoCD from 
