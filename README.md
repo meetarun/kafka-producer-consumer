@@ -1,5 +1,5 @@
 
-###Procedure to Setup Kafka Cluster using Strimzi and ArgoCD 
+### Procedure to Setup Kafka Cluster using Strimzi and ArgoCD 
 
 
 ###### Tools and versions used are ,
@@ -78,7 +78,7 @@ Kafka configs can be found at _resources/application.yml_file_
        C02CQ52BMD6R:anbil-strimzi-kafka Z004MHD$ 
    ```
    
-    9. __consumer_offsets Topic in Strimzi app-kafka cluster 
+    9. ___consumer_offsets_ Topic in Strimzi app-kafka cluster 
    
    ![](./images/strimzi_kafka_consumer_offsets.png)
 
