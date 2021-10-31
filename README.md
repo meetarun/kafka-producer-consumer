@@ -37,18 +37,23 @@ Kafka configs can be found at _resources/application.yml_file_
 2. #### Strimzi Kafka Setup 
      
     1. To Install Helm Chart V3 
+   
         ``` brew install helm ```
    
     2. Add Strimzi Repo to helm chart
+   
        ```helm repo add strimzi https://strimzi.io/charts/```
    
     3. Create the namespace in minikube using
+   
        ```minikube kubectl create ns anbil-kafka-ns```
    
     4. Customize the strimzi helmchart with our custom namespace
+   
        ```helm template ./strimzi-kafka-operator-helm-3-chart-0.26.0.tgz  --namespace anbil-kafka-ns --output-dir \helm-charts```
    
     5. Bootstrap the strimzi kafka operator using
+   
        ```helm install strimzi strimzi/strimzi-kafka-operator --namespace anbil-kafka-ns```
    
     6. Verify Strimzi Kafka Operator is running using
