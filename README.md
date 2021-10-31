@@ -1,3 +1,25 @@
+
+###Procedure to Setup Kafka Cluster using Strimzi and ArgoCD .
+
+###### Tools and versions used are ,
+
+   Tool/App | Version
+   ------------ | -------------
+   kafka | 3.0.0
+   Minikube | v1.23.2
+   Kubernetes | v1.22.2
+   Helm Chart | v3.7.1
+   Strimzi | v0.26.0
+   ArgoCD | v3.2.2
+
+###### Repositories :
+
+App | Repo URL
+------------ | -------------
+ArgoCD Custom Install | https://github.com/meetarun/argocd-kafka-install
+Kafka Helm Manifests | https://github.com/meetarun/argocd-kafka-manifests
+Kafka App | https://github.com/meetarun/kafka-producer-consumer
+
 1. #### SpringBoot Based Kafka Producer and Consumer Application
 
     Repo :  https://github.com/meetarun/kafka-producer-consumer
@@ -15,15 +37,19 @@ Kafka configs can be found at _resources/application.yml_file_
      
     1. To Install Helm Chart V3 
         ``` brew install helm ```
+   
     2. Add Strimzi Repo to helm chart
        ```helm repo add strimzi https://strimzi.io/charts/```
+   
     3. Create the namespace in minikube using
        ```minikube kubectl create ns anbil-kafka-ns```
    
     4. Customize the strimzi helmchart with our custom namespace
        ```helm template ./strimzi-kafka-operator-helm-3-chart-0.26.0.tgz  --namespace anbil-kafka-ns --output-dir \helm-charts```
+   
     5. Bootstrap the strimzi kafka operator using
        ```helm install strimzi strimzi/strimzi-kafka-operator --namespace anbil-kafka-ns```
+   
     6. Verify Strimzi Kafka Operator is running using
    
       ```
@@ -35,6 +61,7 @@ Kafka configs can be found at _resources/application.yml_file_
 
     7. Provision the Strimzi cluster using
        ``` kubectl apply -f kafka/kafka.yml -n anbil-kafka-ns ```
+   
     8. Verify the Cluster Pods
    
       ``` C02CQ52BMD6R:anbil-strimzi-kafka Z004MHD$  kubectl get pods  -n anbil-kafka-ns
@@ -94,22 +121,29 @@ syncPolicy:
    
    ```
  
+  6. To expose kafka services outside of kubernetes cluster, we have enabled NodePort changes
+``` 
+externalAccess.enabled=true
+externalAccess.service.type=NodePort
+externalAccess.service.nodePort={'30001', '30002', '30003'} 
+  ```
 
-   7. Make a PR to make config change for Kafka Broker and merge it
+
+7. Make a PR to make config change for Kafka Broker and merge it
         
-      https://github.com/meetarun/argocd-kafka-manifests/pull/1/files 
+     https://github.com/meetarun/argocd-kafka-manifests/pull/1/files 
 
-   8. As soon as we merge the PR , ArgoCD will trigger a pipeline and redeploy the running 
+8. As soon as we merge the PR , ArgoCD will trigger a pipeline and redeploy the running 
 Kafka Broker Instances.
         
    _checkoutkafka_ cluster instances ![](./images/checkoutkafka-instances.png)
 
-   9. ArgoCD Application Home Page
+9. ArgoCD Application Home Page
     
    ![](./images/ArgoCD_Application.png)
 
-   10. 
-   11. 
+10. 
+11. 
   
    
 
