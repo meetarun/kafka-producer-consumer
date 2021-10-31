@@ -7,34 +7,37 @@
    2. Run the below command or hit the URL in Postman
 
     
-    `curl --location --request POST 'http://localhost:9000/kafka/publish?message=first-test-msg`
+    ```curl --location --request POST 'http://localhost:9000/kafka/publish?message=first-test-msg```
 
 Kafka configs can be found at _resources/application.yml_file_
 
 2. Strimzi Kafka Setup 
      
     1. To Install Helm Chart V3
-        `brew install helm`
+        ```brew install helm```
     2. Add Strimzi Repo to helm chart
-       `helm repo add strimzi https://strimzi.io/charts/`
+       ```helm repo add strimzi https://strimzi.io/charts/```
     3. Create the namespace in minikube using
-       `minikube kubectl create ns anbil-kafka-ns`
+       ```minikube kubectl create ns anbil-kafka-ns```
    
     4. Customize the strimzi helmchart with our custom namespace
-       `helm template ./strimzi-kafka-operator-helm-3-chart-0.26.0.tgz  --namespace anbil-kafka-ns --output-dir \helm-charts`
+       ```helm template ./strimzi-kafka-operator-helm-3-chart-0.26.0.tgz  --namespace anbil-kafka-ns --output-dir \helm-charts```
     5. Bootstrap the strimzi kafka operator using
-       `helm install strimzi strimzi/strimzi-kafka-operator --namespace anbil-kafka-ns`
+       ```helm install strimzi strimzi/strimzi-kafka-operator --namespace anbil-kafka-ns```
     6. Verify Strimzi Kafka Operator is running using
    
-      ` C02CQ52BMD6R:anbil-strimzi-kafka Z004MHD$ helm ls
+      ```
+       C02CQ52BMD6R:anbil-strimzi-kafka Z004MHD$ helm ls
        NAME                             	NAMESPACE	REVISION	UPDATED                             	STATUS  	CHART                        	APP VERSION
        strimzi-kafka-operator-1635345900	default  	1       	2021-10-27 20:15:04.819361 +0530 IST	deployed	strimzi-kafka-operator-0.26.0	0.26.0
-       C02CQ52BMD6R:anbil-strimzi-kafka Z004MHD$`
+       C02CQ52BMD6R:anbil-strimzi-kafka Z004MHD$
+      ```
 
     7. Provision the Strimzi cluster using
-       `kubectl apply -f kafka/kafka.yml -n anbil-kafka-ns`
+       ``` kubectl apply -f kafka/kafka.yml -n anbil-kafka-ns ```
     8. Verify the Cluster Pods
-      ` C02CQ52BMD6R:anbil-strimzi-kafka Z004MHD$  kubectl get pods  -n anbil-kafka-ns
+   
+      ``` C02CQ52BMD6R:anbil-strimzi-kafka Z004MHD$  kubectl get pods  -n anbil-kafka-ns
        NAME                                         READY   STATUS    RESTARTS      AGE
        app-kafka-entity-operator-559986477f-mg42k   1/3     Running   0             12s
        app-kafka-kafka-0                            1/1     Running   0             47s
@@ -44,7 +47,9 @@ Kafka configs can be found at _resources/application.yml_file_
        app-kafka-zookeeper-1                        1/1     Running   0             2m
        app-kafka-zookeeper-2                        1/1     Running   2 (85s ago)   2m
        strimzi-cluster-operator-85bb4c6-kc48g       1/1     Running   0             5m21s
-       C02CQ52BMD6R:anbil-strimzi-kafka Z004MHD$`
+       C02CQ52BMD6R:anbil-strimzi-kafka Z004MHD$ 
+   ```
+   
     9. 
    
 4. Kafka **Helm Chart** Deployment Using **GIT-Ops through ArgoCD**
