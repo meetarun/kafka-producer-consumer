@@ -1,4 +1,4 @@
-1. #####SpringBoot Based Kafka Producer and Consumer Application#####
+1. #### SpringBoot Based Kafka Producer and Consumer Application
 
     Repo :  https://github.com/meetarun/kafka-producer-consumer
 
@@ -11,7 +11,7 @@
 
 Kafka configs can be found at _resources/application.yml_file_
 
-2. #####Strimzi Kafka Setup #####
+2. #### Strimzi Kafka Setup 
      
     1. To Install Helm Chart V3 
         ``` brew install helm ```
@@ -50,9 +50,11 @@ Kafka configs can be found at _resources/application.yml_file_
        C02CQ52BMD6R:anbil-strimzi-kafka Z004MHD$ 
    ```
    
-    9. 
+    9. __consumer_offsets Topic in Strimzi app-kafka cluster 
    
-3. ##### Kafka Helm Chart Deployment Using GIT-Ops through ArgoCD #####
+   ![](./images/strimzi_kafka_consumer_offsets.png)
+
+#### 3.  Kafka Helm Chart Deployment Using GIT-Ops through ArgoCD 
 
     Helm Chart  Manifests Repo : https://github.com/meetarun/argocd-kafka-manifests 
 
@@ -70,7 +72,45 @@ Kafka configs can be found at _resources/application.yml_file_
    4. To Login to the UI find the password for admin using below command
       
        ```  kubectl -n argocdns  get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo ```
-   5. df
+   5. Login to ArgoCD UI and create an Application via UI or through below maninest and point it to our kafka manifest repo,
+``` 
+  project: default
+source:
+  repoURL: 'https://github.com/meetarun/argocd-kafka-manifests.git'
+  path: kafka
+  targetRevision: HEAD
+  helm:
+    valueFiles:
+      - values.yaml
+destination:
+  server: 'https://kubernetes.default.svc'
+  namespace: betakafkans
+syncPolicy:
+  automated:
+    prune: true
+    selfHeal: true
+  syncOptions:
+    - CreateNamespace=true
+   
+   ```
+ 
+
+   7. Make a PR to make config change for Kafka Broker and merge it
+        
+      https://github.com/meetarun/argocd-kafka-manifests/pull/1/files 
+
+   8. As soon as we merge the PR , ArgoCD will trigger a pipeline and redeploy the running 
+Kafka Broker Instances.
+        
+   _checkoutkafka_ cluster instances ![](./images/checkoutkafka-instances.png)
+
+   9. ArgoCD Application Home Page
+    
+   ![](./images/ArgoCD_Application.png)
+
+   10. 
+   11. 
+  
    
 
 
