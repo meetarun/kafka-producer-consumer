@@ -1,5 +1,6 @@
 
-###Procedure to Setup Kafka Cluster using Strimzi and ArgoCD .
+###Procedure to Setup Kafka Cluster using Strimzi and ArgoCD 
+
 
 ###### Tools and versions used are ,
 
@@ -142,8 +143,8 @@ Kafka Broker Instances.
     
    ![](./images/ArgoCD_Application.png)
 
-10. 
-11. 
+
+
   
    
 
