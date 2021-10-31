@@ -13,8 +13,8 @@ Kafka configs can be found at _resources/application.yml_file_
 
 2. Strimzi Kafka Setup 
      
-    1. To Install Helm Chart V3
-        ```brew install helm```
+    1. To Install Helm Chart V3 
+        ``` brew install helm ```
     2. Add Strimzi Repo to helm chart
        ```helm repo add strimzi https://strimzi.io/charts/```
     3. Create the namespace in minikube using
